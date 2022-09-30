@@ -1,0 +1,15 @@
+name: SSL Certificate Information
+on:
+  workflow_dispatch:
+    inputs:
+      host:
+        description: 'Host'
+        default: 'twitter.com'
+        required: true
+        
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+    - name: OpenSSL Connect | X.509
+      run: echo | openssl s_client -connect ${{ github.event.inputs.host }}:443 | openssl x509 -noout -text
